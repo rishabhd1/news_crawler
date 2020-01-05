@@ -30,3 +30,43 @@ class TimesofindiaSpider(scrapy.Spider):
             ).extract_first()
 
             yield item
+        
+        sportsHeadlines = response.xpath(
+            '//*[@id="c_headlines_wdt_1"]/div/div/div')
+        for sportsHeadline in sportsHeadlines:
+            headlines = sportsHeadline.xpath('./ul/li')
+            for headline in headlines:
+                item = NewspaperItem()
+
+                item['host'] = 'timesofindia'
+                item['category'] = 'sports'
+                item['headline'] = headline.xpath(
+                    './span[@class="w_tle"]/a/text()').extract_first()
+                item['url'] = "https://timesofindia.indiatimes.com" + \
+                    headline.xpath(
+                        './span[@class="w_tle"]/a/@href').extract_first()
+                item['date'] = businessHeadline.xpath(
+                    './span[@class="w_bylinec"]/span[@class="strlastupd"]/@rodate'
+                ).extract_first()
+
+                yield item
+        
+        entertainmentHeadlines = response.xpath(
+            '//*[@id="c_headlines_wdt_2"]/div/div/div')
+        for entertainmentHeadline in entertainmentHeadlines:
+            headlines = entertainmentHeadline.xpath('./ul/li')
+            for headline in headlines:
+                item = NewspaperItem()
+
+                item['host'] = 'timesofindia'
+                item['category'] = 'entertainment'
+                item['headline'] = headline.xpath(
+                    './span[@class="w_tle"]/a/text()').extract_first()
+                item['url'] = "https://timesofindia.indiatimes.com" + \
+                    headline.xpath(
+                        './span[@class="w_tle"]/a/@href').extract_first()
+                item['date'] = businessHeadline.xpath(
+                    './span[@class="w_bylinec"]/span[@class="strlastupd"]/@rodate'
+                ).extract_first()
+
+                yield item
