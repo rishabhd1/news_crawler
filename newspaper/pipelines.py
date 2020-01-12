@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
 
 
@@ -29,5 +23,12 @@ class NewspaperPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db[self.collection_name].insert_one(dict(item))
-        return item
+        exists = self.db[self.collection_name].find({'headline': item['headline']})
+        if (exists.count() == 0):
+            self.db[self.collection_name].insert_one(dict(item))
+            return item
+        else:
+            return {
+                'headline': item['headline'],
+                'msg': 'item already exists'
+            }
