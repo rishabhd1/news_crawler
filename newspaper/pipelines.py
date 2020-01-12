@@ -24,7 +24,8 @@ class NewspaperPipeline(object):
 
     def process_item(self, item, spider):
         exists = self.db[self.collection_name].find(
-            {'headline': item['headline']})
+            {'headline': item['headline']},
+            {'date': item['date']})
 
         if (exists.count() == 0):
             self.db[self.collection_name].insert_one(dict(item))
@@ -32,5 +33,6 @@ class NewspaperPipeline(object):
         else:
             return {
                 'headline': item['headline'],
+                'date': item['date'],
                 'msg': 'item already exists'
             }
