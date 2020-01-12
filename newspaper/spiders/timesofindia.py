@@ -1,4 +1,5 @@
 import scrapy
+import re
 
 from ..items import NewspaperItem
 
@@ -24,7 +25,11 @@ class TimesofindiaSpider(scrapy.Spider):
             item['url'] = "https://timesofindia.indiatimes.com" + \
                 businessHeadline.xpath(
                     './span[@class="w_tle"]/a/@href').extract_first()
-            # //*[@id="c_headlines_wdt_2"]/div[1]/ul/li[1]/span[2]/span
+            imageCode = re.search(
+                r'articleshow\/(.+?)\.cms',
+                item['url']).group(1)
+            item['image'] = 'https://timesofindia.indiatimes.com/thumb/msid-' + \
+                imageCode + ',width-400,resizemode-4/' + imageCode + '.jpg'
             item['date'] = businessHeadline.xpath(
                 './span[@class="w_bylinec"]/span[@class="strlastupd"]/@rodate'
             ).extract_first()
@@ -45,6 +50,11 @@ class TimesofindiaSpider(scrapy.Spider):
                 item['url'] = "https://timesofindia.indiatimes.com" + \
                     headline.xpath(
                         './span[@class="w_tle"]/a/@href').extract_first()
+                imageCode = re.search(
+                    r'articleshow\/(.+?)\.cms',
+                    item['url']).group(1)
+                item['image'] = 'https://timesofindia.indiatimes.com/thumb/msid-' + \
+                    imageCode + ',width-400,resizemode-4/' + imageCode + '.jpg'
                 item['date'] = businessHeadline.xpath(
                     './span[@class="w_bylinec"]/span[@class="strlastupd"]/@rodate'
                 ).extract_first()
@@ -65,6 +75,11 @@ class TimesofindiaSpider(scrapy.Spider):
                 item['url'] = "https://timesofindia.indiatimes.com" + \
                     headline.xpath(
                         './span[@class="w_tle"]/a/@href').extract_first()
+                imageCode = re.search(
+                    r'articleshow\/(.+?)\.cms',
+                    item['url']).group(1)
+                item['image'] = 'https://timesofindia.indiatimes.com/thumb/msid-' + \
+                    imageCode + ',width-400,resizemode-4/' + imageCode + '.jpg'
                 item['date'] = businessHeadline.xpath(
                     './span[@class="w_bylinec"]/span[@class="strlastupd"]/@rodate'
                 ).extract_first()
