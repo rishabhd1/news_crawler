@@ -1,5 +1,6 @@
 import scrapy
 import re
+from datetime import datetime
 
 from ..items import NewspaperItem
 
@@ -17,6 +18,10 @@ class TimesofindiaSpider(scrapy.Spider):
             '//*[@id="c_headlines_wdt_2"]/div[1]/ul/li')
         for businessHeadline in businessHeadlines:
             item = NewspaperItem()
+
+            item['createdAt'] = datetime.now()
+            item['clickCount'] = 0
+            item['archived'] = False
 
             item['host'] = 'timesofindia'
             item['category'] = 'business'
@@ -43,6 +48,10 @@ class TimesofindiaSpider(scrapy.Spider):
             for headline in headlines:
                 item = NewspaperItem()
 
+                item['createdAt'] = datetime.now()
+                item['clickCount'] = 0
+                item['archived'] = False
+
                 item['host'] = 'timesofindia'
                 item['category'] = 'sports'
                 item['headline'] = headline.xpath(
@@ -67,6 +76,10 @@ class TimesofindiaSpider(scrapy.Spider):
             headlines = entertainmentHeadline.xpath('./ul/li')
             for headline in headlines:
                 item = NewspaperItem()
+
+                item['createdAt'] = datetime.now()
+                item['clickCount'] = 0
+                item['archived'] = False
 
                 item['host'] = 'timesofindia'
                 item['category'] = 'entertainment'

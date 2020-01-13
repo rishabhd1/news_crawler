@@ -8,3 +8,6 @@ class NewspaperItem(scrapy.Item):
     image = scrapy.Field()
     url = scrapy.Field()
     date = scrapy.Field()
+    clickCount = scrapy.Field()
+    createdAt = scrapy.Field()
+    archived = scrapy.Field()
