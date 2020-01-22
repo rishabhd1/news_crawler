@@ -30,9 +30,8 @@ class TimesofindiaSpider(scrapy.Spider):
             item['url'] = "https://timesofindia.indiatimes.com" + \
                 businessHeadline.xpath(
                     './span[@class="w_tle"]/a/@href').extract_first()
-            imageCode = re.search(
-                r'articleshow\/(.+?)\.cms',
-                item['url']).group(1)
+            imageCode = item['url'].rsplit('/', 1)[-1]
+            imageCode = imageCode.replace('.cms', '')
             item['image'] = 'https://timesofindia.indiatimes.com/thumb/msid-' + \
                 imageCode + ',width-400,resizemode-4/' + imageCode + '.jpg'
             item['date'] = businessHeadline.xpath(
@@ -59,9 +58,8 @@ class TimesofindiaSpider(scrapy.Spider):
                 item['url'] = "https://timesofindia.indiatimes.com" + \
                     headline.xpath(
                         './span[@class="w_tle"]/a/@href').extract_first()
-                imageCode = re.search(
-                    r'articleshow\/(.+?)\.cms',
-                    item['url']).group(1)
+                imageCode = item['url'].rsplit('/', 1)[-1]
+                imageCode = imageCode.replace('.cms', '')
                 item['image'] = 'https://timesofindia.indiatimes.com/thumb/msid-' + \
                     imageCode + ',width-400,resizemode-4/' + imageCode + '.jpg'
                 item['date'] = businessHeadline.xpath(
@@ -88,9 +86,8 @@ class TimesofindiaSpider(scrapy.Spider):
                 item['url'] = "https://timesofindia.indiatimes.com" + \
                     headline.xpath(
                         './span[@class="w_tle"]/a/@href').extract_first()
-                imageCode = re.search(
-                    r'articleshow\/(.+?)\.cms',
-                    item['url']).group(1)
+                imageCode = item['url'].rsplit('/', 1)[-1]
+                imageCode = imageCode.replace('.cms', '')
                 item['image'] = 'https://timesofindia.indiatimes.com/thumb/msid-' + \
                     imageCode + ',width-400,resizemode-4/' + imageCode + '.jpg'
                 item['date'] = businessHeadline.xpath(
