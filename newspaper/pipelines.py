@@ -12,8 +12,8 @@ class NewspaperPipeline(object):
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            mongo_uri=crawler.settings.get('mongodb://127.0.0.1:27017/'),
-            mongo_db=crawler.settings.get('MONGO_DATABASE', 'newspaper')
+            mongo_uri=crawler.settings.get('MONGO_URI'),
+            mongo_db=crawler.settings.get('MONGO_DATABASE')
         )
 
     def open_spider(self, spider):

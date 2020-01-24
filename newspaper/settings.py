@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 
 # Scrapy settings for newspaper project
 #
@@ -67,6 +68,9 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
    'newspaper.pipelines.NewspaperPipeline': 300,
 }
+
+MONGO_URI = os.environ['mongo']
+MONGO_DATABASE = os.environ['db']
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
