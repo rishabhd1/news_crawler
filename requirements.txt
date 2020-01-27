@@ -8,6 +8,7 @@ colorama==0.4.0
 constantly==15.1.0
 cryptography==2.8
 cssselect==1.1.0
+dnspython==1.16.0
 hyperlink==19.0.0
 idna==2.8
 incremental==17.5.0
@@ -34,6 +35,7 @@ Scrapy==1.8.0
 service-identity==18.1.0
 six==1.11.0
 Twisted==19.10.0
+typed-ast==1.4.0
 virtualenv==16.7.9
 virtualenv-clone==0.5.3
 w3lib==1.21.0
