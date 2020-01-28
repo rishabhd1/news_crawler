@@ -26,7 +26,6 @@ class NewspaperPipeline(object):
     def process_item(self, item, spider):
         exists = self.db[self.collection_name].find(
             {'headline': item['headline'],
-            'date': item['date'],
             'archived': item['archived']})
 
         if (exists.count() == 0):
