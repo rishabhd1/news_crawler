@@ -11,6 +11,9 @@ cursor = collection.find({"archived": False})
 
 for doc in cursor:
     diff = datetime.now() - doc['createdAt']
-    if diff.seconds >= 86400:
-        doc['archived'] = True
-        print(doc['_id', " is archived"])
+    if diff.total_seconds() >= 86400:
+        collection.update_one(
+            {"_id": doc["_id"]}, 
+            {"$set": {"archived": True}}
+        )
+        print(doc['_id'], " is archived")
